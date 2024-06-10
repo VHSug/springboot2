@@ -3,7 +3,9 @@ package org.sboot.springbootaula.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -15,7 +17,14 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
+    @Transient
+    private Set<Product> products = new HashSet<>();
+
     public Category() {
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     public Category(Long id, String name) {

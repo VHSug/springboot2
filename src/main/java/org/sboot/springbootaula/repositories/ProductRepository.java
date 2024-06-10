@@ -1,0 +1,12 @@
+package org.sboot.springbootaula.repositories;
+
+
+import org.sboot.springbootaula.entities.Category;
+import org.sboot.springbootaula.entities.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long> {
+
+}
