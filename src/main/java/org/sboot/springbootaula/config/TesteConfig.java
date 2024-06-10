@@ -1,8 +1,8 @@
 package org.sboot.springbootaula.config;
 
 
-import org.course.educandowebs.entities.User;
-import org.course.educandowebs.repositories.UserRepository;
+import org.sboot.springbootaula.entities.User;
+import org.sboot.springbootaula.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,6 @@ import java.util.Arrays;
 
 @Configuration
 @Profile("test")
-
 public class TesteConfig implements CommandLineRunner {
 
     @Autowired
