@@ -1,9 +1,11 @@
 package org.sboot.springbootaula.config;
 
 
+import org.sboot.springbootaula.entities.Category;
 import org.sboot.springbootaula.entities.Order;
 import org.sboot.springbootaula.entities.User;
 import org.sboot.springbootaula.entities.enums.OrderStatus;
+import org.sboot.springbootaula.repositories.CategoryRepository;
 import org.sboot.springbootaula.repositories.OrderRepository;
 import org.sboot.springbootaula.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,16 @@ public class TesteConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
+        Category cat1 = new Category(null, "Eletronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888989", "123456");
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "986887989", "123456");
 
