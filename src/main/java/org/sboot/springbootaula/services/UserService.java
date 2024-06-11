@@ -1,5 +1,6 @@
 package org.sboot.springbootaula.services;
 
+import org.hibernate.query.sqm.EntityTypeException;
 import org.sboot.springbootaula.entities.User;
 import org.sboot.springbootaula.repositories.UserRepository;
 import org.sboot.springbootaula.services.exceptions.DatabaseException;
@@ -43,9 +44,13 @@ public class UserService {
     }
 
     public User update(Long id, User obj) {
-        User entity = repository.getReferenceById(id);
-        updateData(entity, obj);
-        return repository.save(entity);
+        try {
+            User entity = repository.getReferenceById(id);
+            updateData(entity, obj);
+            return repository.save(entity);
+        } catch (EntityTypeException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(User entity, User obj) {
