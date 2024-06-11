@@ -2,12 +2,12 @@ package org.sboot.springbootaula.services;
 
 import org.sboot.springbootaula.entities.User;
 import org.sboot.springbootaula.repositories.UserRepository;
+import org.sboot.springbootaula.services.exceptions.DatabaseException;
 import org.sboot.springbootaula.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.util.List;
@@ -32,6 +32,13 @@ public class UserService {
     }
 
     public void delete(Long id){
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DatabaseException(e.getMessage());
+        }
         repository.deleteById(id);
     }
 
