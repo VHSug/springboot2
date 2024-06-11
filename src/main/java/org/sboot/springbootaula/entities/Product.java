@@ -21,6 +21,7 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
+
     @ManyToMany
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -43,10 +44,10 @@ public class Product implements Serializable {
 
     }
 
-    @JsonIgnore
-    public Set<Order> getOrder(){
+    @JsonIgnore 
+    public Set<Order> getOrders(){
         Set<Order> set = new HashSet<>();
-        for (OrderItem x : items) {
+        for(OrderItem x : items){
             set.add(x.getOrder());
         }
         return set;
@@ -95,6 +96,7 @@ public class Product implements Serializable {
     public Set<Category> getCategories() {
         return categories;
     }
+
 
     @Override
     public boolean equals(Object o) {
